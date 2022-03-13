@@ -22,8 +22,14 @@ func (items Items) Encode(w io.Writer) error {
 	return json.NewEncoder(w).Encode(items)
 }
 
-func GetItems() Items {
-	return itemList
+func GetItems(id string) Items {
+	items := Items{}
+	for _, item := range itemList {
+		if item.ListId == id {
+			items = append(items, item)
+		}
+	}
+	return items
 }
 
 var itemList = Items{
@@ -50,5 +56,17 @@ var itemList = Items{
 		Task:     "Complete project",
 		Priority: 0,
 		ListId:   "0",
+	},
+	{
+		Id:       "4",
+		Task:     "Test API",
+		Priority: 0,
+		ListId:   "1",
+	},
+	{
+		Id:       "5",
+		Task:     "Get things",
+		Priority: 0,
+		ListId:   "1",
 	},
 }

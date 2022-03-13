@@ -14,7 +14,7 @@ func main() {
 	itemHandler := handlers.NewHandler()
 
 	getRouter := router.Methods(http.MethodGet).Subrouter()
-	getRouter.HandleFunc("/item", itemHandler.GetItems)
+	getRouter.HandleFunc("/items/{id}", itemHandler.GetItems)
 
 	log.Println("Server starting on port 9090")
 	log.Fatal(http.ListenAndServe(":9090", router))
