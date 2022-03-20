@@ -6,13 +6,14 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/segmentio/ksuid"
+	"github.com/v24Zer0/ToDo/item-service/database"
 )
 
 func (handler *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
 	log.Println("Get request - Items")
 	vars := mux.Vars(r)
 
-	items := handler.db.RetrieveItems(vars["id"])
+	items := database.RetrieveItems(handler.db, vars["id"])
 	items.Encode(w)
 }
 
@@ -20,7 +21,7 @@ func (handler *ItemHandler) GetLists(w http.ResponseWriter, r *http.Request) {
 	log.Println("Get request - Lists")
 	vars := mux.Vars(r)
 
-	items := handler.db.RetrieveLists(vars["id"])
+	items := database.RetrieveLists(handler.db, vars["id"])
 	items.Encode(w)
 }
 

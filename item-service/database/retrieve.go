@@ -1,15 +1,18 @@
 package database
 
-import "github.com/v24Zer0/ToDo/item-service/models"
+import (
+	"github.com/v24Zer0/ToDo/item-service/models"
+	"gorm.io/gorm"
+)
 
-func (db *Database) RetrieveItems(listID string) *models.Items {
+func RetrieveItems(db *gorm.DB, listID string) *models.Items {
 	var items models.Items
-	db.db.Where(&models.Item{ListID: listID}).Find(&items)
+	db.Where(&models.Item{ListID: listID}).Find(&items)
 	return &items
 }
 
-func (db *Database) RetrieveLists(userID string) *models.Lists {
+func RetrieveLists(db *gorm.DB, userID string) *models.Lists {
 	var lists models.Lists
-	db.db.Where(&models.List{UserID: userID}).Find(&lists)
+	db.Where(&models.List{UserID: userID}).Find(&lists)
 	return &lists
 }

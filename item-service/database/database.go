@@ -8,11 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Database struct {
-	db *gorm.DB
-}
-
-func NewDatabase() (*Database, error) {
+func NewDatabase() (*gorm.DB, error) {
 	dbURL := os.Getenv("dbURL")
 	dbName := os.Getenv("dbName")
 	dbUser := os.Getenv("dbUser")
@@ -24,5 +20,5 @@ func NewDatabase() (*Database, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Database{db: db}, nil
+	return db, nil
 }

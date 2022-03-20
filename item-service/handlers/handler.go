@@ -1,11 +1,13 @@
 package handlers
 
-import "github.com/v24Zer0/ToDo/item-service/database"
+import (
+	"gorm.io/gorm"
+)
 
 type ItemHandler struct {
-	db *database.Database
+	db *gorm.DB
 }
 
-func NewHandler(db *database.Database) *ItemHandler {
+func NewHandler(db *gorm.DB) *ItemHandler {
 	return &ItemHandler{db: db}
 }
