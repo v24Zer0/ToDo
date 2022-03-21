@@ -33,8 +33,8 @@ func main() {
 	itemHandler := handlers.NewHandler(db)
 
 	getRouter := router.Methods(http.MethodGet).Subrouter()
-	getRouter.HandleFunc("/items/{id}", itemHandler.GetItems)
-	getRouter.HandleFunc("/lists/{id}", itemHandler.GetLists)
+	getRouter.HandleFunc("/items/{id:[a-zA-Z0-9]{27}}", itemHandler.GetItems)
+	getRouter.HandleFunc("/lists/{id:[a-zA-Z0-9]{27}}", itemHandler.GetLists)
 	getRouter.HandleFunc("/id", itemHandler.GetID)
 
 	server := http.Server{

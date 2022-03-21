@@ -11,12 +11,12 @@ type List struct {
 	UserID string `json:"user_id"`
 }
 
+func (l *List) Decode(r io.Reader) error {
+	return json.NewDecoder(r).Decode(l)
+}
+
 type Lists []*List
 
 func (l *Lists) Encode(w io.Writer) error {
 	return json.NewEncoder(w).Encode(l)
-}
-
-func (l *Lists) Decode(r io.Reader) error {
-	return json.NewDecoder(r).Decode(l)
 }
