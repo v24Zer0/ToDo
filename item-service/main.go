@@ -37,6 +37,10 @@ func main() {
 	getRouter.HandleFunc("/lists/{id:[a-zA-Z0-9]{27}}", itemHandler.GetLists)
 	getRouter.HandleFunc("/id", itemHandler.GetID)
 
+	postRouter := router.Methods(http.MethodPost).Subrouter()
+	postRouter.HandleFunc("/item", itemHandler.CreateItem)
+	postRouter.HandleFunc("/list", itemHandler.CreateList)
+
 	server := http.Server{
 		Addr:    ":9090",
 		Handler: router,

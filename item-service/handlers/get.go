@@ -14,6 +14,7 @@ func (handler *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	items := database.RetrieveItems(handler.db, vars["id"])
+	addHeaders(w)
 	items.Encode(w)
 }
 
@@ -22,6 +23,7 @@ func (handler *ItemHandler) GetLists(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	items := database.RetrieveLists(handler.db, vars["id"])
+	addHeaders(w)
 	items.Encode(w)
 }
 
