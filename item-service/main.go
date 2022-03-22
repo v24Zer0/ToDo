@@ -11,6 +11,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/v24Zer0/ToDo/item-service/authentication"
 	"github.com/v24Zer0/ToDo/item-service/database"
 	"github.com/v24Zer0/ToDo/item-service/handlers"
 )
@@ -23,6 +24,9 @@ func main() {
 	}
 
 	router := mux.NewRouter()
+
+	// authentication middleware for each route
+	router.Use(authentication.AuthMiddleware)
 
 	// create new database connection
 	db, err := database.NewDatabase()
