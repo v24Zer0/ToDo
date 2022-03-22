@@ -17,6 +17,5 @@ func CreateList(db *gorm.DB, list *models.List) {
 	id := ksuid.New()
 
 	list.ID = id.String()
-
 	db.Create(list)
 }

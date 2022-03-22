@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"errors"
 	"log"
 	"net/http"
@@ -13,7 +12,7 @@ func (handler *ItemHandler) CreateItem(w http.ResponseWriter, r *http.Request) {
 	log.Println("Post request - Item")
 
 	var item models.Item
-	err := json.NewDecoder(r.Body).Decode(&item)
+	err := item.Decode(r.Body)
 	if err != nil {
 		log.Println("Could not decode body")
 		w.WriteHeader(http.StatusBadRequest)
@@ -34,7 +33,7 @@ func (handler *ItemHandler) CreateList(w http.ResponseWriter, r *http.Request) {
 	log.Println("Post request - List")
 
 	var list models.List
-	err := json.NewDecoder(r.Body).Decode(&list)
+	err := list.Decode(r.Body)
 	if err != nil {
 		log.Println("Could not decode body")
 		w.WriteHeader(http.StatusBadRequest)
