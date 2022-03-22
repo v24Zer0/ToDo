@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 
@@ -19,6 +20,11 @@ func (handler *ItemHandler) CreateItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	err = validateItemRequest(&item)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 	log.Println(item.Task)
 
 	w.WriteHeader(http.StatusOK)
@@ -35,7 +41,33 @@ func (handler *ItemHandler) CreateList(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	err = validateListRequest(&list)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 	log.Println(list.Name)
 
 	w.WriteHeader(http.StatusOK)
+}
+
+func validateItemRequest(item *models.Item) error {
+	if item.Task == "" {
+		return errors.New("missing task")
+	}
+	if item.ListID == "" {
+		return errors.New("missing list_id")
+	}
+	return nil
+}
+
+func validateListRequest(list *models.List) error {
+	if list.Name == "" {
+		return errors.New("missing name")
+	}
+
+	if list.UserID == "" {
+		return errors.New("missing user_id")
+	}
+	return nil
 }
