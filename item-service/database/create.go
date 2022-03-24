@@ -6,16 +6,18 @@ import (
 	"gorm.io/gorm"
 )
 
-func CreateItem(db *gorm.DB, item *models.Item) {
+func CreateItem(db *gorm.DB, item *models.Item) error {
 	id := ksuid.New()
 
 	item.ID = id.String()
-	db.Create(item)
+	result := db.Create(item)
+	return result.Error
 }
 
-func CreateList(db *gorm.DB, list *models.List) {
+func CreateList(db *gorm.DB, list *models.List) error {
 	id := ksuid.New()
 
 	list.ID = id.String()
-	db.Create(list)
+	result := db.Create(list)
+	return result.Error
 }

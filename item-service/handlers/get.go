@@ -13,7 +13,11 @@ func (handler *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
 	log.Println("Get request - Items")
 	vars := mux.Vars(r)
 
-	items := database.RetrieveItems(handler.db, vars["id"])
+	items, err := database.RetrieveItems(handler.db, vars["id"])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	addHeaders(w)
 	items.Encode(w)
 }
@@ -22,7 +26,11 @@ func (handler *ItemHandler) GetLists(w http.ResponseWriter, r *http.Request) {
 	log.Println("Get request - Lists")
 	vars := mux.Vars(r)
 
-	items := database.RetrieveLists(handler.db, vars["id"])
+	items, err := database.RetrieveLists(handler.db, vars["id"])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	addHeaders(w)
 	items.Encode(w)
 }
