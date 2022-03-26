@@ -19,7 +19,7 @@ func (handler *ItemHandler) CreateItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = validateItem(&item)
+	err = validatePostItem(&item)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -44,7 +44,7 @@ func (handler *ItemHandler) CreateList(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = validateList(&list)
+	err = validatePostList(&list)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -59,7 +59,7 @@ func (handler *ItemHandler) CreateList(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-func validateItem(item *models.Item) error {
+func validatePostItem(item *models.Item) error {
 	if item.Task == "" {
 		return errors.New("missing item task")
 	}
@@ -70,7 +70,7 @@ func validateItem(item *models.Item) error {
 	return nil
 }
 
-func validateList(list *models.List) error {
+func validatePostList(list *models.List) error {
 	if list.Name == "" {
 		return errors.New("missing list name")
 	}

@@ -45,6 +45,12 @@ func main() {
 	postRouter.HandleFunc("/item", itemHandler.CreateItem)
 	postRouter.HandleFunc("/list", itemHandler.CreateList)
 
+	updateRouter := router.Methods(http.MethodPut).Subrouter()
+	updateRouter.HandleFunc("/item", itemHandler.UpdateItem)
+	updateRouter.HandleFunc("/list", itemHandler.UpdateList)
+
+	// deleteRouter := router.Methods(http.MethodDelete).Subrouter()
+
 	server := http.Server{
 		Addr:    ":9090",
 		Handler: router,
