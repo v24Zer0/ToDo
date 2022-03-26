@@ -49,7 +49,9 @@ func main() {
 	updateRouter.HandleFunc("/item", itemHandler.UpdateItem)
 	updateRouter.HandleFunc("/list", itemHandler.UpdateList)
 
-	// deleteRouter := router.Methods(http.MethodDelete).Subrouter()
+	deleteRouter := router.Methods(http.MethodDelete).Subrouter()
+	deleteRouter.HandleFunc("/item/{id:[a-zA-Z0-9]{27}}", itemHandler.DeleteItem)
+	deleteRouter.HandleFunc("/list/{id:[a-zA-Z0-9]{27}}", itemHandler.DeleteList)
 
 	server := http.Server{
 		Addr:    ":9090",
