@@ -11,6 +11,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/v24Zer0/ToDO/user-service/database"
+	"github.com/v24Zer0/ToDO/user-service/handlers"
 )
 
 func main() {
@@ -20,6 +22,15 @@ func main() {
 	}
 
 	router := mux.NewRouter()
+
+	db, err := database.NewDatabase()
+	if err != nil {
+		log.Println("Error connecting to database")
+	}
+	handler := handlers.NewHandler(db)
+
+	postRouter := router.Methods(http.MethodPost).Subrouter()
+	postRouter.HandleFunc("/user", handler.CreateUser)
 
 	server := http.Server{
 		Addr:    ":9091",
