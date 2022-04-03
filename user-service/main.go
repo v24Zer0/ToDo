@@ -32,6 +32,9 @@ func main() {
 	postRouter := router.Methods(http.MethodPost).Subrouter()
 	postRouter.HandleFunc("/user", handler.CreateUser)
 
+	deleteRouter := router.Methods(http.MethodDelete).Subrouter()
+	deleteRouter.HandleFunc("/user", handler.DeleteUser)
+
 	server := http.Server{
 		Addr:    ":9091",
 		Handler: router,

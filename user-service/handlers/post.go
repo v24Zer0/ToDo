@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/v24Zer0/ToDO/user-service/database"
@@ -9,6 +10,8 @@ import (
 )
 
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
+	log.Println("Post request - User")
+
 	var user models.User
 	err := user.Decode(r.Body)
 	if err != nil {
