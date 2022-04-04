@@ -34,6 +34,10 @@ func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
+func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
+
 func validateUserRequest(u *models.User) error {
 	if u.Username == "" {
 		return errors.New("missing username")

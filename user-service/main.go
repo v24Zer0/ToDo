@@ -25,12 +25,14 @@ func main() {
 
 	db, err := database.NewDatabase()
 	if err != nil {
-		log.Println("Error connecting to database")
+		log.Fatalln("Error connecting to database")
 	}
+
 	handler := handlers.NewHandler(db)
 
 	postRouter := router.Methods(http.MethodPost).Subrouter()
 	postRouter.HandleFunc("/user", handler.CreateUser)
+	postRouter.HandleFunc("/login", handler.Login)
 
 	deleteRouter := router.Methods(http.MethodDelete).Subrouter()
 	deleteRouter.HandleFunc("/user", handler.DeleteUser)
