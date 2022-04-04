@@ -8,7 +8,7 @@ import (
 	"github.com/v24Zer0/ToDo/item-service/database"
 )
 
-func (handler *ItemHandler) DeleteItem(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) DeleteItem(w http.ResponseWriter, r *http.Request) {
 	log.Println("Delete request - Item")
 
 	vars := mux.Vars(r)
@@ -22,7 +22,7 @@ func (handler *ItemHandler) DeleteItem(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func (handler *ItemHandler) DeleteList(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) DeleteList(w http.ResponseWriter, r *http.Request) {
 	log.Println("Delete request - List")
 
 	vars := mux.Vars(r)

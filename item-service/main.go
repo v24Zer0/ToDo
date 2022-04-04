@@ -31,27 +31,27 @@ func main() {
 	// create new database connection
 	db, err := database.NewDatabase()
 	if err != nil {
-		log.Println("Error connecting to database")
+		log.Fatalln("Error connecting to database")
 	}
 
-	itemHandler := handlers.NewHandler(db)
+	handler := handlers.NewHandler(db)
 
 	getRouter := router.Methods(http.MethodGet).Subrouter()
-	getRouter.HandleFunc("/items/{id:[a-zA-Z0-9]{27}}", itemHandler.GetItems)
-	getRouter.HandleFunc("/lists/{id:[a-zA-Z0-9]{27}}", itemHandler.GetLists)
-	getRouter.HandleFunc("/id", itemHandler.GetID)
+	getRouter.HandleFunc("/items/{id:[a-zA-Z0-9]{27}}", handler.GetItems)
+	getRouter.HandleFunc("/lists/{id:[a-zA-Z0-9]{27}}", handler.GetLists)
+	getRouter.HandleFunc("/id", handler.GetID)
 
 	postRouter := router.Methods(http.MethodPost).Subrouter()
-	postRouter.HandleFunc("/item", itemHandler.CreateItem)
-	postRouter.HandleFunc("/list", itemHandler.CreateList)
+	postRouter.HandleFunc("/item", handler.CreateItem)
+	postRouter.HandleFunc("/list", handler.CreateList)
 
 	updateRouter := router.Methods(http.MethodPut).Subrouter()
-	updateRouter.HandleFunc("/item", itemHandler.UpdateItem)
-	updateRouter.HandleFunc("/list", itemHandler.UpdateList)
+	updateRouter.HandleFunc("/item", handler.UpdateItem)
+	updateRouter.HandleFunc("/list", handler.UpdateList)
 
 	deleteRouter := router.Methods(http.MethodDelete).Subrouter()
-	deleteRouter.HandleFunc("/item/{id:[a-zA-Z0-9]{27}}", itemHandler.DeleteItem)
-	deleteRouter.HandleFunc("/list/{id:[a-zA-Z0-9]{27}}", itemHandler.DeleteList)
+	deleteRouter.HandleFunc("/item/{id:[a-zA-Z0-9]{27}}", handler.DeleteItem)
+	deleteRouter.HandleFunc("/list/{id:[a-zA-Z0-9]{27}}", handler.DeleteList)
 
 	server := http.Server{
 		Addr:    ":9090",

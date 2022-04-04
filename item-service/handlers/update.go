@@ -9,7 +9,7 @@ import (
 	"github.com/v24Zer0/ToDo/item-service/models"
 )
 
-func (handler *ItemHandler) UpdateItem(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) UpdateItem(w http.ResponseWriter, r *http.Request) {
 	log.Println("Put request - Item")
 
 	var item models.Item
@@ -34,7 +34,7 @@ func (handler *ItemHandler) UpdateItem(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func (handler *ItemHandler) UpdateList(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) UpdateList(w http.ResponseWriter, r *http.Request) {
 	log.Println("Put request - List")
 
 	var list models.List

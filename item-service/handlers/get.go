@@ -9,7 +9,7 @@ import (
 	"github.com/v24Zer0/ToDo/item-service/database"
 )
 
-func (handler *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) GetItems(w http.ResponseWriter, r *http.Request) {
 	log.Println("Get request - Items")
 	vars := mux.Vars(r)
 
@@ -22,7 +22,7 @@ func (handler *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
 	items.Encode(w)
 }
 
-func (handler *ItemHandler) GetLists(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) GetLists(w http.ResponseWriter, r *http.Request) {
 	log.Println("Get request - Lists")
 	vars := mux.Vars(r)
 
@@ -35,7 +35,7 @@ func (handler *ItemHandler) GetLists(w http.ResponseWriter, r *http.Request) {
 	items.Encode(w)
 }
 
-func (handler *ItemHandler) GetID(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) GetID(w http.ResponseWriter, r *http.Request) {
 	id := ksuid.New()
 	w.Write([]byte(id.String()))
 }

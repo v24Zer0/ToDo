@@ -6,12 +6,12 @@ import (
 	"gorm.io/gorm"
 )
 
-type ItemHandler struct {
+type Handler struct {
 	db *gorm.DB
 }
 
-func NewHandler(db *gorm.DB) *ItemHandler {
-	return &ItemHandler{db: db}
+func NewHandler(db *gorm.DB) *Handler {
+	return &Handler{db: db}
 }
 
 func addHeaders(w http.ResponseWriter) {
