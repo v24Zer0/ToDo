@@ -33,6 +33,13 @@ func main() {
 
 	handler := handlers.NewHandler(db)
 
+	getRouter := router.Methods(http.MethodGet).Subrouter()
+	getRouter.HandleFunc("/{id:[a-zA-Z0-9]{27}}", handler.GetToken)
+
+	postRouter := router.Methods(http.MethodPost).Subrouter()
+	postRouter.HandleFunc("/", handler.CreateToken)
+	postRouter.HandleFunc("/validate", handler.ValidateToken)
+
 	server := http.Server{
 		Addr:    fmt.Sprintf(":%s", port),
 		Handler: router,

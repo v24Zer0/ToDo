@@ -13,3 +13,7 @@ type UserToken struct {
 func (t *UserToken) Encode(w io.Writer) error {
 	return json.NewEncoder(w).Encode(t)
 }
+
+func (t *UserToken) Decode(r io.Reader) error {
+	return json.NewDecoder(r).Decode(t)
+}
