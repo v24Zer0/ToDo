@@ -23,7 +23,7 @@ func (h *Handler) CreateToken(w http.ResponseWriter, r *http.Request) {
 
 	err = database.CreateToken(h.db, user.UserID)
 	if err != nil {
-		http.Error(w, "missing user_id", http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
@@ -51,7 +51,7 @@ func (h *Handler) ValidateToken(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if t.Token != token.Token {
-		http.Error(w, err.Error(), http.StatusUnauthorized)
+		http.Error(w, "token does not match", http.StatusUnauthorized)
 		return
 	}
 
