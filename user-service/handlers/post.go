@@ -37,6 +37,8 @@ func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
+	log.Println("Post request - Login")
+
 	var user models.User
 	err := user.Decode(r.Body)
 	if err != nil {

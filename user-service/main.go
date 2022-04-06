@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -21,6 +22,8 @@ func main() {
 		log.Println("Error loading environment variables")
 	}
 
+	port := os.Getenv("Port")
+
 	router := mux.NewRouter()
 
 	db, err := database.NewDatabase()
@@ -38,13 +41,13 @@ func main() {
 	deleteRouter.HandleFunc("/user", handler.DeleteUser)
 
 	server := http.Server{
-		Addr:    ":9091",
+		Addr:    fmt.Sprintf(":%s", port),
 		Handler: router,
 	}
 
 	// start http server
 	go func() {
-		log.Println("Server starting on port 9091")
+		log.Printf("Server starting on port %s", port)
 
 		err := server.ListenAndServe()
 		if err != nil {
