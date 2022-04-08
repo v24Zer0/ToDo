@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"errors"
 	"net/http"
 
 	"github.com/v24Zer0/ToDo/auth-service/database"
@@ -38,33 +37,16 @@ func (h *Handler) ValidateToken(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = validateTokenRequest(&token)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	t, err := database.RetrieveToken(h.db, token.UserID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	if t.Token != token.Token {
-		http.Error(w, "token does not match", http.StatusUnauthorized)
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-}
-
-func validateTokenRequest(token *models.UserToken) error {
-	if token.UserID == "" {
-		return errors.New("missing user_id")
-	}
-
 	if token.Token == "" {
-		return errors.New("missing token")
+		http.Error(w, "missing token", http.StatusBadRequest)
+		return
 	}
-	return nil
+
+	t, err := database.RetrieveByToken(h.db, token.Token)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	t.Encode(w)
 }
