@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/segmentio/ksuid"
-	"github.com/v24Zer0/ToDO/user-service/models"
+	"github.com/v24Zer0/ToDo/user-service/models"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

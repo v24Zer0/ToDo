@@ -12,8 +12,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	"github.com/v24Zer0/ToDO/user-service/database"
-	"github.com/v24Zer0/ToDO/user-service/handlers"
+	"github.com/v24Zer0/ToDo/user-service/database"
+	"github.com/v24Zer0/ToDo/user-service/handlers"
 )
 
 func main() {
