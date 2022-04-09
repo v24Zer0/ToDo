@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/v24Zer0/ToDo/auth-service/database"
@@ -8,6 +9,8 @@ import (
 )
 
 func (h *Handler) CreateToken(w http.ResponseWriter, r *http.Request) {
+	log.Println("Post request - Create")
+
 	var user models.UserToken
 	err := user.Decode(r.Body)
 	if err != nil {
@@ -30,6 +33,8 @@ func (h *Handler) CreateToken(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) ValidateToken(w http.ResponseWriter, r *http.Request) {
+	log.Println("Post request - Validate")
+
 	var token models.UserToken
 	err := token.Decode(r.Body)
 	if err != nil {
