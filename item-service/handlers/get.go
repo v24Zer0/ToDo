@@ -4,11 +4,38 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/v24Zer0/ToDo/item-service/models"
+	"github.com/gorilla/mux"
+	"github.com/segmentio/ksuid"
+	"github.com/v24Zer0/ToDo/item-service/database"
 )
 
-func (handler *ItemHandler) GetItems(w http.ResponseWriter, r *http.Request) {
+func (handler *Handler) GetItems(w http.ResponseWriter, r *http.Request) {
 	log.Println("Get request - Items")
-	items := models.GetItems()
+	vars := mux.Vars(r)
+
+	items, err := database.RetrieveItems(handler.db, vars["id"])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	addHeaders(w)
 	items.Encode(w)
+}
+
+func (handler *Handler) GetLists(w http.ResponseWriter, r *http.Request) {
+	log.Println("Get request - Lists")
+	vars := mux.Vars(r)
+
+	items, err := database.RetrieveLists(handler.db, vars["id"])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	addHeaders(w)
+	items.Encode(w)
+}
+
+func (handler *Handler) GetID(w http.ResponseWriter, r *http.Request) {
+	id := ksuid.New()
+	w.Write([]byte(id.String()))
 }

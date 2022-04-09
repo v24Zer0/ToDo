@@ -12,13 +12,11 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	"github.com/v24Zer0/ToDo/item-service/authentication"
-	"github.com/v24Zer0/ToDo/item-service/database"
-	"github.com/v24Zer0/ToDo/item-service/handlers"
+	"github.com/v24Zer0/ToDO/user-service/database"
+	"github.com/v24Zer0/ToDO/user-service/handlers"
 )
 
 func main() {
-	// load environment variables
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Println("Error loading environment variables")
@@ -28,10 +26,6 @@ func main() {
 
 	router := mux.NewRouter()
 
-	// authentication middleware for each route
-	router.Use(authentication.AuthMiddleware)
-
-	// create new database connection
 	db, err := database.NewDatabase()
 	if err != nil {
 		log.Fatalln("Error connecting to database")
@@ -39,22 +33,12 @@ func main() {
 
 	handler := handlers.NewHandler(db)
 
-	getRouter := router.Methods(http.MethodGet).Subrouter()
-	getRouter.HandleFunc("/items/{id:[a-zA-Z0-9]{27}}", handler.GetItems)
-	getRouter.HandleFunc("/lists/{id:[a-zA-Z0-9]{27}}", handler.GetLists)
-	getRouter.HandleFunc("/id", handler.GetID)
-
 	postRouter := router.Methods(http.MethodPost).Subrouter()
-	postRouter.HandleFunc("/item", handler.CreateItem)
-	postRouter.HandleFunc("/list", handler.CreateList)
-
-	updateRouter := router.Methods(http.MethodPut).Subrouter()
-	updateRouter.HandleFunc("/item", handler.UpdateItem)
-	updateRouter.HandleFunc("/list", handler.UpdateList)
+	postRouter.HandleFunc("/user", handler.CreateUser)
+	postRouter.HandleFunc("/login", handler.Login)
 
 	deleteRouter := router.Methods(http.MethodDelete).Subrouter()
-	deleteRouter.HandleFunc("/item/{id:[a-zA-Z0-9]{27}}", handler.DeleteItem)
-	deleteRouter.HandleFunc("/list/{id:[a-zA-Z0-9]{27}}", handler.DeleteList)
+	deleteRouter.HandleFunc("/user", handler.DeleteUser)
 
 	server := http.Server{
 		Addr:    fmt.Sprintf(":%s", port),
