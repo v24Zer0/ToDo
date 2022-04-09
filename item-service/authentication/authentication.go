@@ -2,7 +2,6 @@ package authentication
 
 import (
 	"bytes"
-	"log"
 	"net/http"
 	"os"
 
@@ -19,25 +18,28 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		var payload bytes.Buffer
 		err := usertoken.Encode(&payload)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusUnauthorized)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		resp, err := http.Post(authURL, "application/json", &payload)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusUnauthorized)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 		defer resp.Body.Close()
+
+		if resp.StatusCode != 200 {
+			http.Error(w, "not authenticated", http.StatusUnauthorized)
+			return
+		}
 
 		err = usertoken.Decode(resp.Body)
 		if err != nil {
 			return
 		}
 
-		log.Println(usertoken.Token)
 		r.Header.Add("User_ID", usertoken.UserID)
-
 		next.ServeHTTP(w, r)
 	})
 }
