@@ -1,4 +1,4 @@
-module github.com/v24Zer0/ToDO/user-service
+module github.com/v24Zer0/ToDo/user-service
 
 go 1.17
 

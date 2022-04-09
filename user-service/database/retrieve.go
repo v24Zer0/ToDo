@@ -3,7 +3,7 @@ package database
 import (
 	"errors"
 
-	"github.com/v24Zer0/ToDO/user-service/models"
+	"github.com/v24Zer0/ToDo/user-service/models"
 	"gorm.io/gorm"
 )
 

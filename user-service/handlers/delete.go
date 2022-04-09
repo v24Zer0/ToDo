@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/v24Zer0/ToDO/user-service/database"
-	"github.com/v24Zer0/ToDO/user-service/models"
+	"github.com/v24Zer0/ToDo/user-service/database"
+	"github.com/v24Zer0/ToDo/user-service/models"
 )
 
 func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request) {

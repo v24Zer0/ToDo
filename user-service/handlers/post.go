@@ -5,10 +5,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/v24Zer0/ToDO/user-service/authentication"
-	"github.com/v24Zer0/ToDO/user-service/database"
-	"github.com/v24Zer0/ToDO/user-service/models"
-	"github.com/v24Zer0/ToDO/user-service/utility"
+	"github.com/v24Zer0/ToDo/user-service/authentication"
+	"github.com/v24Zer0/ToDo/user-service/database"
+	"github.com/v24Zer0/ToDo/user-service/models"
+	"github.com/v24Zer0/ToDo/user-service/utility"
 )
 
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
