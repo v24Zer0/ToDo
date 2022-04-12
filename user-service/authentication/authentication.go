@@ -15,6 +15,11 @@ type AuthToken struct {
 	Error error
 }
 
+type UserValidation struct {
+	UserID string
+	Error  error
+}
+
 func GetToken(c chan AuthToken, id string) {
 	authURL := os.Getenv("AuthService")
 	url := fmt.Sprintf("%s/%s", authURL, id)
@@ -62,4 +67,38 @@ func CreateToken(c chan bool, id string) {
 	}
 
 	c <- true
+}
+
+func ValidateToken(c chan UserValidation, token string) {
+	authService := os.Getenv("AuthService")
+	authURL := fmt.Sprintf("%s/%s", authService, "/validate")
+
+	userToken := models.UserToken{Token: token}
+	var payload bytes.Buffer
+
+	err := userToken.Encode(&payload)
+	if err != nil {
+		c <- UserValidation{Error: err}
+		return
+	}
+
+	resp, err := http.Post(authURL, "application/json", &payload)
+	if err != nil {
+		c <- UserValidation{Error: err}
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		c <- UserValidation{Error: errors.New("not authenticated")}
+		return
+	}
+
+	err = userToken.Decode(resp.Body)
+	if err != nil {
+		c <- UserValidation{Error: err}
+		return
+	}
+
+	c <- UserValidation{UserID: userToken.UserID}
 }
