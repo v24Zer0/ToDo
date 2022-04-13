@@ -2,6 +2,6 @@ package utility
 
 import "golang.org/x/crypto/bcrypt"
 
-func ComparePassword(hash string, password string) error {
-	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+func ComparePassword(c chan error, hash string, password string) {
+	c <- bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 }

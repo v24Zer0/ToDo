@@ -33,6 +33,16 @@ func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	c := make(chan bool)
+
+	go authentication.CreateToken(c, user.ID)
+
+	success := <-c
+	if !success {
+		http.Error(w, "failed to create token", http.StatusInternalServerError)
+		return
+	}
+
 	w.WriteHeader(http.StatusCreated)
 }
 
@@ -58,16 +68,28 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = utility.ComparePassword(u.Password, user.Password)
+	c1 := make(chan error)
+	c2 := make(chan authentication.AuthToken)
+
+	go utility.ComparePassword(c1, u.Password, user.Password)
+	go authentication.GetToken(c2, u.ID)
+
+	err = <-c1
+	token := <-c2
+
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	token := authentication.GetToken(u.ID)
+	if token.Error != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	response := models.UserResponse{
 		ID:    u.ID,
-		Token: token,
+		Token: token.Token,
 	}
 
 	w.Header().Add("Content-Type", "application/json")
