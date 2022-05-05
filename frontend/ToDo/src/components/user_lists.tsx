@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, ListRenderItem } from "react-native";
 import List from "../models/list";
 import ListComponent from "./list_component";
@@ -17,12 +17,14 @@ const listData: List[] = [
 ];
 
 const UserLists = () => {
+    const [lists, setLists] = useState<List[]>([]);
+
     const renderItem: ListRenderItem<List> = ({ item }) => (
-        <ListComponent id={item.id} name={item.name} user_id={item.user_id}/>
+        <ListComponent list={item}/>
     );
 
     return (
-        <FlatList data={listData} renderItem={renderItem} keyExtractor={list => list.id}/>
+        <FlatList data={lists} renderItem={renderItem} keyExtractor={list => list.id}/>
     );
 }
 

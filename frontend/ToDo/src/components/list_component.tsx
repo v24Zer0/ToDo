@@ -2,11 +2,15 @@ import React from "react";
 import { Text, View } from "react-native";
 import List from "../models/list";
 
-const ListComponent: React.FC<List> = ({id, name, user_id}) => {
+interface ListProps {
+    list: List;
+}
+
+const ListComponent: React.FC<ListProps> = ({ list }) => {
     return (
         <View>
             <Text>
-                {name}
+                {list.name}
             </Text>
         </View>
     );

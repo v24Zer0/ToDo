@@ -30,7 +30,7 @@ const App = () => {
 	return (
 		<View>
 			<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-			<ItemList />
+			<ItemList list={{id: "list_id1", name: "Home", user_id: "user1"}} />
 		</View>
 	);
 };

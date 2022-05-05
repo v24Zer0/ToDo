@@ -2,11 +2,15 @@ import React from "react";
 import { Text, View } from "react-native";
 import Item from "../models/item";
 
-const ItemComponent: React.FC<Item> = ({ id, task, priority, list_id }) => {
+interface ItemProps {
+    item: Item;
+}
+
+const ItemComponent: React.FC<ItemProps> = ({ item }) => {
     return (
         <View>
             <Text>
-                {task}
+                {item.task}
             </Text>
         </View>
     );

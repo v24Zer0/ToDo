@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, ListRenderItem, Text, View } from "react-native";
 import Item from "../models/item";
+import List from "../models/list";
 import ItemComponent from "./item_component";
 
 const items: Item[] = [
@@ -24,16 +25,20 @@ const items: Item[] = [
     }
 ];
 
-const ItemList = () => {
+interface ItemListProps {
+    list: List;
+}
+
+const ItemList: React.FC<ItemListProps> = ({ list }) => {
+    const [items, setItems] = useState<Item[]>([]);
+
     const renderItem: ListRenderItem<Item> = ({ item }) => (
-        <ItemComponent id={item.id} task={item.task} priority={item.priority} list_id={item.list_id} />
+        <ItemComponent item={item}/>
     );
 
     return (
         <View>
-            <Text>
-                Hello World!
-            </Text>
+            <Text>{list.name}</Text>
             <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id}/>
         </View>
     );
