@@ -9,29 +9,19 @@
  */
 
 import React from 'react';
-import {
-  StatusBar,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
-import {
-  Colors
-} from 'react-native/Libraries/NewAppScreen';
-import ItemList from './components/item_list';
+import MyStack from './stack';
 
 const App = () => {
-	const isDarkMode = useColorScheme() === 'dark';
-
-	const backgroundStyle = {
-		backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-	};
+	// const backgroundStyle = {
+	// 	backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+	// };
 
 	return (
-		<View>
-			<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-			<ItemList list={{id: "list_id1", name: "Home", user_id: "user1"}} />
-		</View>
+		<NavigationContainer>
+			<MyStack />
+		</NavigationContainer>
 	);
 };
 
