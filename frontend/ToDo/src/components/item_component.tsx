@@ -4,8 +4,11 @@ import Item from "../models/item";
 
 interface ItemProps {
     item: Item;
+    // setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    // setModalItem: React.Dispatch<React.SetStateAction<Item>>;
 }
 
+// Add Pressable component to trigger modal display
 const ItemComponent: React.FC<ItemProps> = ({ item }) => {
     return (
         <View>

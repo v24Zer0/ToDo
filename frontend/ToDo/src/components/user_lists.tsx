@@ -16,6 +16,7 @@ const listData: List[] = [
     }
 ];
 
+// Add Modal and pass state functions to ListComponent
 const UserLists = () => {
     const [lists, setLists] = useState<List[]>([]);
 

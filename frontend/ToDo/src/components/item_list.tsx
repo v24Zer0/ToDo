@@ -29,6 +29,10 @@ interface ItemListProps {
     list: List;
 }
 
+// Add Modal and pass setVisible, setItem to ItemComponent
+// onPress triggers ItemList
+// onLongPress triggers Modal display
+
 const ItemList: React.FC<ItemListProps> = ({ list }) => {
     const [items, setItems] = useState<Item[]>([]);
 
