@@ -9,6 +9,7 @@ interface ItemProps {
 }
 
 // Add Pressable component to trigger modal display
+// onPress triggers Modal
 const ItemComponent: React.FC<ItemProps> = ({ item }) => {
     return (
         <View>
