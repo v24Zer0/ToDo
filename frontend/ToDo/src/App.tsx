@@ -11,7 +11,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import MyStack from './stack';
+import RootStack from './screens/stack';
 
 const App = () => {
 	// const backgroundStyle = {
@@ -20,8 +20,9 @@ const App = () => {
 
 	return (
 		<NavigationContainer>
-			<MyStack />
+			<RootStack />
 		</NavigationContainer>
+		// <ItemList list={{id: "unique_list1", name: "list1", user_id: "user1"}} />
 	);
 };
 

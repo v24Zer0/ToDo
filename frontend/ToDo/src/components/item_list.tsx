@@ -4,7 +4,7 @@ import Item from "../models/item";
 import List from "../models/list";
 import ItemComponent from "./item_component";
 
-const items: Item[] = [
+const mockItems: Item[] = [
     {
         id: "item_id1",
         task: "task1",
@@ -31,7 +31,7 @@ interface ItemListProps {
 
 // Add Modal and pass setVisible, setItem to ItemComponent
 const ItemList: React.FC<ItemListProps> = ({ list }) => {
-    const [items, setItems] = useState<Item[]>([]);
+    const [items, setItems] = useState<Item[]>(mockItems);
 
     const renderItem: ListRenderItem<Item> = ({ item }) => (
         <ItemComponent item={item}/>
