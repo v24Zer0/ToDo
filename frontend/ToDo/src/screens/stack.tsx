@@ -1,7 +1,7 @@
 import React from "react";
-import LoginScreen from "./loginScreen";
 import RootStackParamList from "./rootStackParamList";
 import { createStackNavigator } from "@react-navigation/stack";
+import LoginScreen from "./loginScreen";
 import ListScreen from "./listScreen";
 import ItemScreen from "./itemScreen";
 
@@ -13,7 +13,7 @@ const RootStack = () => {
             <Stack.Screen name="Login" component={LoginScreen} />
             {/* <Stack.Screen name="Signup" component={Signup} /> */}
             <Stack.Screen name="List" component={ListScreen} />
-            <Stack.Screen name="Item" component={ItemScreen} />
+            <Stack.Screen name="Item" component={ItemScreen} options={({ route }) => ({ title: route.params.list.name })} />
         </Stack.Navigator>
     );
 }
