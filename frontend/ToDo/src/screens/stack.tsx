@@ -1,9 +1,9 @@
 import React from "react";
 import RootStackParamList from "./rootStackParamList";
 import { createStackNavigator } from "@react-navigation/stack";
-import LoginScreen from "./loginScreen";
-import ListScreen from "./listScreen";
-import ItemScreen from "./itemScreen";
+import LoginScreen from "./login_screen";
+import ListScreen from "./list_screen";
+import ItemScreen from "./item_screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
