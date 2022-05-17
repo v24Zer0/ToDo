@@ -10,7 +10,7 @@ const LoginScreen = ({ navigation, route }: Props) => {
     return (
         <View>
             <Login />
-            <Button title="To List Screen" onPress={() => navigation.navigate("List")} />
+            <Button title="To List Screen" onPress={() => navigation.reset({ index: 0, routes:[{ name:"List" }] })} />
         </View> 
     );
 }
