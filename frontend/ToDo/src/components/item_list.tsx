@@ -44,7 +44,7 @@ const ItemList: React.FC<ItemListProps> = ({ list }) => {
     return (
         <View>
             <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-                <ItemModal item={modalItem} setModalVisible={setModalVisible} />
+                <ItemModal item={modalItem} />
             </Modal>
             <Text>{list.name}</Text>
             <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id}/>

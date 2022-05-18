@@ -1,16 +1,17 @@
 import React from "react";
-import { View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Item from "../models/item";
 
 interface Props {
     item: Item;
-    setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ItemModal: React.FC<Props> = ({ item, setModalVisible }) => {
+const ItemModal: React.FC<Props> = ({ item }) => {
     return (
         <View>
-            {item.task}
+            <Text>
+                {item.task}
+            </Text>
         </View>
     );
 }

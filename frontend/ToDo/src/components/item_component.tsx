@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import Item from "../models/item";
 
 interface ItemProps {
@@ -16,6 +16,12 @@ const ItemComponent: React.FC<ItemProps> = ({ item, setModalVisible, setModalIte
             <Text>
                 {item.task}
             </Text>
+            <Button title="Show Modal" 
+                onPress={() => { 
+                    setModalVisible(true);
+                    setModalItem(item);
+                }}
+            />
         </View>
     );
 }

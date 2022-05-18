@@ -4,10 +4,9 @@ import List from "../models/list";
 
 interface Props {
     list: List;
-    setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ListModal: React.FC<Props> = ({ list, setModalVisible }) => {
+const ListModal: React.FC<Props> = ({ list }) => {
     return (
         <View>
             {list.name}
