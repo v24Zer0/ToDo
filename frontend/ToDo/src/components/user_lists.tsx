@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FlatList, ListRenderItem } from "react-native";
+import { FlatList, ListRenderItem, Modal, View } from "react-native";
 import List from "../models/list";
 import ListComponent from "./list_component";
+import ListModal from "./list_modal";
 
-const listData: List[] = [
+const mockLists: List[] = [
     {
         id: "unique_list1",
         name: "list1",
@@ -18,14 +19,22 @@ const listData: List[] = [
 
 // Add Modal and pass state functions to ListComponent
 const UserLists = () => {
-    const [lists, setLists] = useState<List[]>([]);
+    const [lists, setLists] = useState<List[]>(mockLists);
+
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [modalList, setModalList] = useState<List>({id: "", name: "", user_id: "user1"});
 
     const renderItem: ListRenderItem<List> = ({ item }) => (
-        <ListComponent list={item}/>
+        <ListComponent list={item} setModalVisible={setModalVisible} setModalList={setModalList} />
     );
 
     return (
-        <FlatList data={lists} renderItem={renderItem} keyExtractor={list => list.id}/>
+        <View>
+            <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
+                <ListModal list={modalList} />
+            </Modal>
+            <FlatList data={lists} renderItem={renderItem} keyExtractor={list => list.id}/>
+        </View>
     );
 }
 

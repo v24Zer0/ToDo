@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import List from "../models/list";
 
 interface Props {
@@ -9,7 +9,9 @@ interface Props {
 const ListModal: React.FC<Props> = ({ list }) => {
     return (
         <View>
-            {list.name}
+            <Text>
+                {list.name}
+            </Text>
         </View>
     );
 }
