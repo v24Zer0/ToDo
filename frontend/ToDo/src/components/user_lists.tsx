@@ -17,15 +17,19 @@ const mockLists: List[] = [
     }
 ];
 
+interface Props {
+    navigate(list: List): void;
+}
+
 // Add Modal and pass state functions to ListComponent
-const UserLists = () => {
+const UserLists: React.FC<Props> = ({ navigate }) => {
     const [lists, setLists] = useState<List[]>(mockLists);
 
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [modalList, setModalList] = useState<List>({id: "", name: "", user_id: "user1"});
 
     const renderItem: ListRenderItem<List> = ({ item }) => (
-        <ListComponent list={item} setModalVisible={setModalVisible} setModalList={setModalList} />
+        <ListComponent list={item} setModalVisible={setModalVisible} setModalList={setModalList} navigate={navigate} />
     );
 
     return (

@@ -9,10 +9,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'List'>;
 const ListScreen = ({ navigation, route }: Props) => {
     return (
         <View>
-            <UserLists />
-            <Button title="To Item Screen" 
-                onPress={() => navigation.navigate("Item", {list: {id: "list_id", name: "list1", user_id: "user1"}})} 
-            />
+            <UserLists navigate={(list) => navigation.navigate("Item", {list})} />
         </View>
     );
 }
