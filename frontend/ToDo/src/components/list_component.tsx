@@ -16,11 +16,9 @@ const ListComponent: React.FC<ListProps> = ({ list, setModalVisible, setModalLis
     return (
         <View>
             <Pressable onLongPress={() => {
-                    setModalVisible(true);
-                    setModalList(list);
-                }}
-                onPress={() => navigate(list)}
-            >
+                setModalVisible(true);
+                setModalList(list);
+            }} onPress={() => navigate(list)}>
                 <Text>
                     {list.name}
                 </Text>

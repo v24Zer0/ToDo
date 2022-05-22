@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, ListRenderItem, Modal, Text, View } from "react-native";
+import { Button, FlatList, ListRenderItem, Modal, Text, View } from "react-native";
 import Item from "../models/item";
 import List from "../models/list";
 import ItemComponent from "./item_component";
@@ -44,10 +44,11 @@ const ItemList: React.FC<ItemListProps> = ({ list }) => {
     return (
         <View>
             <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-                <ItemModal item={modalItem} />
+                <ItemModal item={modalItem} list={list} />
             </Modal>
             <Text>{list.name}</Text>
             <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <Button title="Create new item" />
         </View>
     );
 }

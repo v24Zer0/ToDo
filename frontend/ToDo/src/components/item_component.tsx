@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Item from "../models/item";
+import List from "../models/list";
 
 interface ItemProps {
     item: Item;
@@ -13,15 +14,15 @@ interface ItemProps {
 const ItemComponent: React.FC<ItemProps> = ({ item, setModalVisible, setModalItem }) => {
     return (
         <View>
-            <Text>
-                {item.task}
-            </Text>
-            <Button title="Show Modal" 
-                onPress={() => { 
-                    setModalVisible(true);
-                    setModalItem(item);
-                }}
-            />
+            <Pressable onPress={() => {
+                setModalVisible(true);
+                setModalItem(item);
+            }}>
+                <Text>
+                    {item.task}
+                </Text>
+            </Pressable>
+            
         </View>
     );
 }
