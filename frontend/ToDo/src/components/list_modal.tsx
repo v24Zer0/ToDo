@@ -4,14 +4,16 @@ import List from "../models/list";
 
 interface Props {
     list: List;
+    setUpdate(): void;
 }
 
-const ListModal: React.FC<Props> = ({ list }) => {
+const ListModal: React.FC<Props> = ({ list, setUpdate }) => {
     return (
         <View>
             <Text>
                 {list.name}
             </Text>
+            <Button title="Update list" onPress={ setUpdate } />
         </View>
     );
 }

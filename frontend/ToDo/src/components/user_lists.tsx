@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FlatList, ListRenderItem, Modal, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Button, FlatList, ListRenderItem, Modal, View } from "react-native";
 import List from "../models/list";
 import ListComponent from "./list_component";
 import ListModal from "./list_modal";
@@ -17,6 +17,19 @@ const mockLists: List[] = [
     }
 ];
 
+const mockLists2: List[] = [
+    {
+        id: "unique_list13",
+        name: "list3",
+        user_id: "user1"
+    },
+    {
+        id: "unique_list4",
+        name: "list4",
+        user_id: "user1"
+    }
+];
+
 interface Props {
     navigate(list: List): void;
 }
@@ -24,9 +37,14 @@ interface Props {
 // Add Modal and pass state functions to ListComponent
 const UserLists: React.FC<Props> = ({ navigate }) => {
     const [lists, setLists] = useState<List[]>(mockLists);
+    const [update, setUpdate] = useState<boolean>(false);
 
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [modalList, setModalList] = useState<List>({id: "", name: "", user_id: "user1"});
+
+    useEffect(() => {
+        update ? setLists(mockLists2) : setLists(mockLists)
+    }, [update]);
 
     const renderItem: ListRenderItem<List> = ({ item }) => (
         <ListComponent list={item} setModalVisible={setModalVisible} setModalList={setModalList} navigate={navigate} />
@@ -35,9 +53,10 @@ const UserLists: React.FC<Props> = ({ navigate }) => {
     return (
         <View>
             <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-                <ListModal list={modalList} />
+                <ListModal list={modalList} setUpdate={() => setUpdate(!update)} />
             </Modal>
             <FlatList data={lists} renderItem={renderItem} keyExtractor={list => list.id}/>
+            <Button title="Create new list" onPress={() => { setUpdate(!update) }} />
         </View>
     );
 }

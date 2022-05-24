@@ -22,7 +22,6 @@ const ItemComponent: React.FC<ItemProps> = ({ item, setModalVisible, setModalIte
                     {item.task}
                 </Text>
             </Pressable>
-            
         </View>
     );
 }
