@@ -1,7 +1,6 @@
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 import Item from "../models/item";
-import List from "../models/list";
 
 interface ItemProps {
     item: Item;

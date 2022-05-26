@@ -5,8 +5,8 @@ import LoginScreen from "./login_screen";
 import ListScreen from "./list_screen";
 import ItemScreen from "./item_screen";
 import UserScreen from "./user_screen";
-import Signup from "../components/signup";
 import SignupScreen from "./signup_screen";
+import UserButton from "../components/user_button";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -16,12 +16,14 @@ const RootStack = () => {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Signup" component={SignupScreen} />
             <Stack.Screen name="List" component={ListScreen} 
-                options={({ headerRight: () => <Signup /> })} 
+                options={({ navigation }) => ({ 
+                    headerRight: () => <UserButton navigate={() => navigation.navigate("User", { user: { id: "", username: "user1" }})} /> 
+                })} 
             />
             <Stack.Screen name="Item" component={ItemScreen} 
-                options={({ route }) => ({ 
+                options={({ navigation, route }) => ({ 
                     title: route.params.list.name, 
-                    headerRight: () => <Signup /> 
+                    headerRight: () => <UserButton navigate={() => navigation.navigate("User", { user: { id: "", username: "user1" }})} /> 
                 })} 
             />
             <Stack.Screen name="User" component={UserScreen} 

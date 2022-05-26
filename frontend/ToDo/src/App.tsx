@@ -22,7 +22,6 @@ const App = () => {
 		<NavigationContainer>
 			<RootStack />
 		</NavigationContainer>
-		// <ItemList list={{id: "unique_list1", name: "list1", user_id: "user1"}} />
 	);
 };
 

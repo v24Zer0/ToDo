@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import List from "../models/list";
 
 interface ListProps {

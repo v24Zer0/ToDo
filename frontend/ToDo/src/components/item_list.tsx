@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, FlatList, ListRenderItem, Modal, Text, View } from "react-native";
+import { Button, FlatList, ListRenderItem, Modal, View } from "react-native";
 import Item from "../models/item";
 import List from "../models/list";
 import ItemComponent from "./item_component";

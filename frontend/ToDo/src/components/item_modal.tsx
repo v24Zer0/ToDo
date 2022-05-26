@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Pressable, Text, View } from "react-native";
+import { Alert, Button, Text, View } from "react-native";
 import Item from "../models/item";
 import List from "../models/list";
 
@@ -13,9 +13,16 @@ const ItemModal: React.FC<Props> = ({ item, list, setUpdate }) => {
     return (
         <View>
             <Text>
+                Update item
+            </Text>
+            <Text>
                 {item.task}
             </Text>
+            <Text>
+                {item.priority}
+            </Text>
             <Button title="Update item" onPress={ setUpdate } />
+            <Button title="Delete item" onPress={() => Alert.alert("Item deleted")} />
         </View>
     );
 }
