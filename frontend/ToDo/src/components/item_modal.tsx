@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert, Button, Text, View } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 import Item from "../models/item";
 import List from "../models/list";
 
@@ -10,17 +11,16 @@ interface Props {
 }
 
 const ItemModal: React.FC<Props> = ({ item, list, setUpdate }) => {
+    const [task, setTask] = useState<string>("");
+    const [priority, setPriority] = useState<string>("");
+
     return (
         <View>
             <Text>
                 Update item
             </Text>
-            <Text>
-                {item.task}
-            </Text>
-            <Text>
-                {item.priority}
-            </Text>
+            <TextInput placeholder={item.task} onChangeText={setTask} value={task} />
+            <TextInput placeholder={item.priority.toString()} onChangeText={setPriority} value={priority} />
             <Button title="Update item" onPress={ setUpdate } />
             <Button title="Delete item" onPress={() => Alert.alert("Item deleted")} />
         </View>
