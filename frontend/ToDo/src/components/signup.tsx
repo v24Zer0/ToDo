@@ -1,12 +1,19 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { Button, Text, TextInput, View } from "react-native";
 
-const Signup = () => {
+type Props = {
+    navigate(): void;
+}
+
+const Signup: React.FC<Props> = ({ navigate }) => {
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
     return (
         <View>
-            <Text>
-                Signup
-            </Text>
+            <TextInput onChangeText={setUsername} value={username} />
+            <TextInput secureTextEntry={true} onChangeText={setPassword} value={password} />
+            <Button title="Create account"  onPress={navigate} />
         </View>
     );
 }

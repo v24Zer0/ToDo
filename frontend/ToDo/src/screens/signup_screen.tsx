@@ -9,7 +9,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 const SignupScreen = ({ navigation }: Props) => {
     return (
         <View>
-            <Signup />
+            <Signup navigate={() => navigation.navigate("Login")} />
             <Button title="Already have an account?" onPress={() => navigation.navigate("Login")} />
         </View>
     );

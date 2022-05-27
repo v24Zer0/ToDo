@@ -19,6 +19,7 @@ const RootStack = () => {
             />
             <Stack.Screen name="List" component={ListScreen} 
                 options={({ navigation }) => ({ 
+                    title: "Lists",
                     headerRight: () => <UserButton navigate={() => navigation.navigate("User", { user: { id: "", username: "user1" }})} /> 
                 })} 
             />
