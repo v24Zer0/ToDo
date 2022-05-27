@@ -6,12 +6,11 @@ import { Button, View } from "react-native";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
-const LoginScreen = ({ navigation, route }: Props) => {
+const LoginScreen = ({ navigation }: Props) => {
     return (
         <View>
-            <Login />
-            <Button title="Signup" onPress={() => navigation.navigate("Signup")} />
-            <Button title="Login" onPress={() => navigation.reset({ index: 0, routes:[{ name:"List" }] })} />
+            <Login navigate={() => navigation.reset({ index: 0, routes:[{ name: "List" }] })} />
+            <Button title="Create an account" onPress={() => navigation.navigate("Signup")} />
         </View> 
     );
 }

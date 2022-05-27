@@ -6,11 +6,11 @@ import RootStackParamList from "./rootStackParamList";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Signup">;
 
-const SignupScreen = ({ navigation, route }: Props) => {
+const SignupScreen = ({ navigation }: Props) => {
     return (
         <View>
             <Signup />
-            <Button title="Login" onPress={() => navigation.navigate("Login")} />
+            <Button title="Already have an account?" onPress={() => navigation.navigate("Login")} />
         </View>
     );
 }
