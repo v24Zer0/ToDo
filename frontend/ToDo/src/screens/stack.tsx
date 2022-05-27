@@ -14,7 +14,9 @@ const RootStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Signup" component={SignupScreen} />
+            <Stack.Screen name="Signup" component={SignupScreen}
+                options={({ title: "Create an account" })}
+            />
             <Stack.Screen name="List" component={ListScreen} 
                 options={({ navigation }) => ({ 
                     headerRight: () => <UserButton navigate={() => navigation.navigate("User", { user: { id: "", username: "user1" }})} /> 
@@ -27,7 +29,7 @@ const RootStack = () => {
                 })} 
             />
             <Stack.Screen name="User" component={UserScreen} 
-                options={({ title: "Update details" })} 
+                options={({ title: "Profile" })} 
             />
         </Stack.Navigator>
     );

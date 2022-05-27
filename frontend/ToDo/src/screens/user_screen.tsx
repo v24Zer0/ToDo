@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { Text, View } from "react-native";
+import { Alert, Button, Text, View } from "react-native";
 import RootStackParamList from "./rootStackParamList";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'User'>;
@@ -11,6 +11,8 @@ const UserScreen = ({ navigation, route }: Props) => {
             <Text>
                 {route.params.user.username}
             </Text>
+            <Button title="Logout" onPress={() => navigation.reset({ index: 0, routes:[{ name: "Login" }] })} />
+            <Button title="Delete account" onPress={() => Alert.alert("Account deleted")} />
         </View>
     );
 }
