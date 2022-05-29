@@ -8,20 +8,27 @@ interface Props {
     item: Item;
     list: List;
     setUpdate(): void;
+    setModalVisible(): void;
 }
 
-const ItemModal: React.FC<Props> = ({ item, list, setUpdate }) => {
+const ItemModal: React.FC<Props> = ({ item, list, setUpdate, setModalVisible }) => {
     const [task, setTask] = useState<string>("");
     const [priority, setPriority] = useState<string>("");
 
     return (
         <View>
+            <Button title="Back" onPress={setModalVisible} />
             <Text>
                 Update item
             </Text>
             <TextInput placeholder={item.task} onChangeText={setTask} value={task} />
             <TextInput placeholder={item.priority.toString()} onChangeText={setPriority} value={priority} />
-            <Button title="Update item" onPress={ setUpdate } />
+            <Button title="Update item" 
+                onPress={() => {
+                    setUpdate();
+                    setModalVisible(); 
+                }} 
+            />
             <Button title="Delete item" onPress={() => Alert.alert("Item deleted")} />
         </View>
     );

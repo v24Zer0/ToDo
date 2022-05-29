@@ -8,8 +8,6 @@ interface ItemProps {
     setModalItem: React.Dispatch<React.SetStateAction<Item>>;
 }
 
-// Add Pressable component to trigger modal display
-// onPress triggers Modal
 const ItemComponent: React.FC<ItemProps> = ({ item, setModalVisible, setModalItem }) => {
     return (
         <View>

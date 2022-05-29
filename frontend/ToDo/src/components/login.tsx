@@ -12,7 +12,7 @@ const Login: React.FC<Props> = ({ navigate }) => {
     return (
         <View>
             <TextInput onChangeText={setUsername} placeholder="Username" value={username} />
-            <TextInput onChangeText={setPassword} placeholder="Password" value={password} />
+            <TextInput onChangeText={setPassword} secureTextEntry={true} placeholder="Password" value={password} />
             <Button title="login" onPress={navigate} />
         </View>
     );

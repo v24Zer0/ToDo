@@ -53,7 +53,9 @@ const UserLists: React.FC<Props> = ({ navigate }) => {
     return (
         <View>
             <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-                <ListModal list={modalList} setUpdate={() => setUpdate(!update)} />
+                <ListModal list={modalList} setUpdate={() => setUpdate(!update)} 
+                    setModalVisible={() => setModalVisible(false)} 
+                />
             </Modal>
             <FlatList data={lists} renderItem={renderItem} keyExtractor={list => list.id}/>
             <Button title="Create new list" onPress={() => { setUpdate(!update) }} />

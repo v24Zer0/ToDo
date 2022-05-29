@@ -70,7 +70,9 @@ const ItemList: React.FC<ItemListProps> = ({ list }) => {
     return (
         <View>
             <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-                <ItemModal item={modalItem} list={list} setUpdate={() => setUpdate(!update)} />
+                <ItemModal item={modalItem} list={list} setUpdate={() => setUpdate(!update)} 
+                    setModalVisible={() => setModalVisible(false)} 
+                />
             </Modal>
             <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id}/>
             <Button title="Create new item" onPress={() => { setUpdate(!update) }} />

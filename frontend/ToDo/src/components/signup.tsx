@@ -11,8 +11,8 @@ const Signup: React.FC<Props> = ({ navigate }) => {
 
     return (
         <View>
-            <TextInput onChangeText={setUsername} value={username} />
-            <TextInput secureTextEntry={true} onChangeText={setPassword} value={password} />
+            <TextInput onChangeText={setUsername} placeholder="Username" value={username} />
+            <TextInput secureTextEntry={true} onChangeText={setPassword} placeholder="Password" value={password} />
             <Button title="Create account"  onPress={navigate} />
         </View>
     );

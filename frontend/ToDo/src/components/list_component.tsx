@@ -9,9 +9,6 @@ interface ListProps {
     navigate(list: List): void;
 }
 
-// Add Pressable component to trigger modal display
-// onPress triggers ItemList
-// onLongPress triggers Modal display
 const ListComponent: React.FC<ListProps> = ({ list, setModalVisible, setModalList, navigate }) => {
     return (
         <View>
