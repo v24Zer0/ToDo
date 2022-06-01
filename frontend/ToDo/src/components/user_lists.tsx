@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, FlatList, ListRenderItem, Modal, View } from "react-native";
 import List from "../models/list";
 import ListComponent from "./list_component";
+import ListCreateModal from "./list_create_modal";
 import ListModal from "./list_modal";
 
 const mockLists: List[] = [
@@ -42,6 +43,8 @@ const UserLists: React.FC<Props> = ({ navigate }) => {
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [modalList, setModalList] = useState<List>({id: "", name: "", user_id: "user1"});
 
+    const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
+
     useEffect(() => {
         update ? setLists(mockLists2) : setLists(mockLists)
     }, [update]);
@@ -56,6 +59,9 @@ const UserLists: React.FC<Props> = ({ navigate }) => {
                 <ListModal list={modalList} setUpdate={() => setUpdate(!update)} 
                     setModalVisible={() => setModalVisible(false)} 
                 />
+            </Modal>
+            <Modal visible={createModalVisible} onRequestClose={() => setCreateModalVisible(false)}>
+                <ListCreateModal setModalVisible={() => setCreateModalVisible(false)} />
             </Modal>
             <FlatList data={lists} renderItem={renderItem} keyExtractor={list => list.id}/>
             <Button title="Create new list" onPress={() => { setUpdate(!update) }} />

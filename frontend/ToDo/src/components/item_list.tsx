@@ -3,6 +3,7 @@ import { Button, FlatList, ListRenderItem, Modal, View } from "react-native";
 import Item from "../models/item";
 import List from "../models/list";
 import ItemComponent from "./item_component";
+import ItemCreateModal from "./item_create_modal";
 import ItemModal from "./item_modal";
 
 const mockItems: Item[] = [
@@ -59,6 +60,8 @@ const ItemList: React.FC<ItemListProps> = ({ list }) => {
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [modalItem, setModalItem] = useState<Item>({id: "", list_id: "", task: "", priority: 0});
 
+    const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
+
     const renderItem: ListRenderItem<Item> = ({ item }) => (
         <ItemComponent item={item} setModalVisible={setModalVisible} setModalItem={setModalItem} />
     );
@@ -73,6 +76,9 @@ const ItemList: React.FC<ItemListProps> = ({ list }) => {
                 <ItemModal item={modalItem} list={list} setUpdate={() => setUpdate(!update)} 
                     setModalVisible={() => setModalVisible(false)} 
                 />
+            </Modal>
+            <Modal visible={createModalVisible} onRequestClose={() => setCreateModalVisible(false)}>
+                <ItemCreateModal setModalVisible={() => setCreateModalVisible(false)} />
             </Modal>
             <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id}/>
             <Button title="Create new item" onPress={() => { setUpdate(!update) }} />
