@@ -26,7 +26,7 @@ const RootStack = () => {
             <Stack.Screen name="Item" component={ItemScreen} 
                 options={({ navigation, route }) => ({ 
                     title: route.params.list.name, 
-                    headerRight: () => <UserButton navigate={() => navigation.navigate("User", { user: { id: "", username: "user1" }})} /> 
+                    headerRight: () => <UserButton navigate={() => navigation.navigate("User")} /> 
                 })} 
             />
             <Stack.Screen name="User" component={UserScreen} 

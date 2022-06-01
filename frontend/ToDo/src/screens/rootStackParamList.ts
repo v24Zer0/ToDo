@@ -5,7 +5,7 @@ type RootStackParamList = {
     Login: undefined;
     List: undefined;
     Item: {list: List}; 
-    User: {user: User};
+    User: undefined;
     Signup: undefined;
 }
 
