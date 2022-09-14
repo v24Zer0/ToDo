@@ -52,7 +52,6 @@ interface ItemListProps {
     list: List;
 }
 
-// Add Modal and pass setModalVisible, setModalItem to ItemComponent
 const ItemList: React.FC<ItemListProps> = ({ list }) => {
     const [items, setItems] = useState<Item[]>(mockItems);
     const [update, setUpdate] = useState<boolean>(false);
@@ -74,14 +73,14 @@ const ItemList: React.FC<ItemListProps> = ({ list }) => {
         <View>
             <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
                 <ItemModal item={modalItem} list={list} setUpdate={() => setUpdate(!update)} 
-                    setModalVisible={() => setModalVisible(false)} 
+                    closeModal={() => setModalVisible(false)} 
                 />
             </Modal>
             <Modal visible={createModalVisible} onRequestClose={() => setCreateModalVisible(false)}>
-                <ItemCreateModal setModalVisible={() => setCreateModalVisible(false)} />
+                <ItemCreateModal closeModal={() => setCreateModalVisible(false)} />
             </Modal>
             <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.id}/>
-            <Button title="Create new item" onPress={() => { setUpdate(!update) }} />
+            <Button title="Create new item" onPress={() => { setCreateModalVisible(true) }} />
         </View>
     );
 }

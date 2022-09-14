@@ -8,16 +8,16 @@ interface Props {
     item: Item;
     list: List;
     setUpdate(): void;
-    setModalVisible(): void;
+    closeModal(): void;
 }
 
-const ItemModal: React.FC<Props> = ({ item, list, setUpdate, setModalVisible }) => {
+const ItemModal: React.FC<Props> = ({ item, list, setUpdate, closeModal }) => {
     const [task, setTask] = useState<string>("");
     const [priority, setPriority] = useState<string>("");
 
     return (
         <View>
-            <Button title="Back" onPress={setModalVisible} />
+            <Button title="Back" onPress={closeModal} />
             <Text>
                 Update item
             </Text>
@@ -26,7 +26,7 @@ const ItemModal: React.FC<Props> = ({ item, list, setUpdate, setModalVisible }) 
             <Button title="Update item" 
                 onPress={() => {
                     setUpdate();
-                    setModalVisible(); 
+                    closeModal(); 
                 }} 
             />
             <Button title="Delete item" onPress={() => Alert.alert("Item deleted")} />

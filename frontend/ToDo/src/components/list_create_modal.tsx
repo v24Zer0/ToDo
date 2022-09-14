@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert, Button, Text, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 type Props = {
-    setModalVisible(): void;
+    closeModal(): void;
 }
 
-const ListCreateModal: React.FC<Props> = ({ setModalVisible }) => {
+const ListCreateModal: React.FC<Props> = ({ closeModal }) => {
+    const [name, setName] = useState<string>("");
+
     return (
         <View>
             <Text>
                 Create list
             </Text>
-            <TextInput />
-            <TextInput />
+            <TextInput placeholder="Name" onChangeText={setName} value={name} />
             <Button title="Create" onPress={() => Alert.alert("Created list")} />
-            <Button title="Cancel" onPress={setModalVisible} />
+            <Button title="Cancel" onPress={closeModal} />
         </View>
     );
 }

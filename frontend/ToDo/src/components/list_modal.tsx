@@ -6,15 +6,15 @@ import List from "../models/list";
 interface Props {
     list: List;
     setUpdate(): void;
-    setModalVisible(): void;
+    closeModal(): void;
 }
 
-const ListModal: React.FC<Props> = ({ list, setUpdate, setModalVisible }) => {
+const ListModal: React.FC<Props> = ({ list, setUpdate, closeModal }) => {
     const [name, setName] = useState<string>("");
 
     return (
         <View>
-            <Button title="Back" onPress={setModalVisible} />
+            <Button title="Back" onPress={closeModal} />
             <Text>
                 Update list
             </Text>
@@ -22,7 +22,7 @@ const ListModal: React.FC<Props> = ({ list, setUpdate, setModalVisible }) => {
             <Button title="Update list" 
                 onPress={() => {
                     setUpdate();
-                    setModalVisible();
+                    closeModal();
                 }} 
             />
             <Button title="Delete list" onPress={() => Alert.alert("List deleted")} />

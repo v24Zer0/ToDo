@@ -35,7 +35,6 @@ interface Props {
     navigate(list: List): void;
 }
 
-// Add Modal and pass state functions to ListComponent
 const UserLists: React.FC<Props> = ({ navigate }) => {
     const [lists, setLists] = useState<List[]>(mockLists);
     const [update, setUpdate] = useState<boolean>(false);
@@ -57,14 +56,14 @@ const UserLists: React.FC<Props> = ({ navigate }) => {
         <View>
             <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
                 <ListModal list={modalList} setUpdate={() => setUpdate(!update)} 
-                    setModalVisible={() => setModalVisible(false)} 
+                    closeModal={() => setModalVisible(false)} 
                 />
             </Modal>
             <Modal visible={createModalVisible} onRequestClose={() => setCreateModalVisible(false)}>
-                <ListCreateModal setModalVisible={() => setCreateModalVisible(false)} />
+                <ListCreateModal closeModal={() => setCreateModalVisible(false)} />
             </Modal>
             <FlatList data={lists} renderItem={renderItem} keyExtractor={list => list.id}/>
-            <Button title="Create new list" onPress={() => { setUpdate(!update) }} />
+            <Button title="Create new list" onPress={() => { setCreateModalVisible(true) }} />
         </View>
     );
 }
